@@ -205,13 +205,13 @@
 <h4 id="组件相关"><a href="#组件相关" class="headerlink" title="组件相关"></a>组件相关</h4><h5 id="富文本"><a href="#富文本" class="headerlink" title="富文本"></a>富文本</h5><p>weex 中所有文字需要包裹在text标签下，text为块级，不支持嵌套。因此weex中无法使用内联文字。</p>
 <ol>
 <li><p>写死的文字</p>
-<p>如：7日年化最高达<font color="#ff4400">3~6%</font>，取现最快1秒到</p>
+<p>如：一段文字<font color="#ff4400">一段文字</font>，一段文字</p>
 </li>
 </ol>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 手动分割文字，并设置flex-directon: row (默认是column)</span><br><span class="line">// 因为weex页面宽度都以750px为基础，不必担心分割文字在不同屏幕显示不同，都会自动缩放。</span><br><span class="line"></span><br><span class="line">&lt;div class=&quot;rich_text_row&quot;&gt;</span><br><span class="line">    &lt;text class=&quot;rich_text_normal&quot;&gt;7日年化最高达&lt;/text&gt;</span><br><span class="line">    &lt;text class=&quot;rich_text_red&quot;&gt;3~6%&lt;/text&gt;</span><br><span class="line">    &lt;text class=&quot;rich_text_normal&quot;&gt;，取现最快1秒到&lt;/text&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 <ol>
 <li><p>接口返回的文字</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 原生提供了一个richText标签，可以接受html格式字符串，并渲染。</span><br><span class="line">// 目前约定可以设置width、height 通过style属性传入。</span><br><span class="line">// ios对样式设置支持较好，安卓很多样式不支持，如color</span><br><span class="line">&lt;richText :data=&quot;getContent&quot; style=&quot;width:484px;height:450px;&quot;&gt;&lt;/richText&gt;</span><br><span class="line"></span><br><span class="line">getContent() &#123;</span><br><span class="line">    return `&lt;div style=&quot;color: #333;</span><br><span class="line">                font-size: 14px;</span><br><span class="line">                line-height: 25px;</span><br><span class="line">                &quot;&gt;$&#123;this.content&#125;&lt;/div&gt;`</span><br><span class="line">&#125; </span><br><span class="line">//this.content为接口返回数据：当前产品风险等级为（高风险等级），超出您当前风险承受等级（稳健平衡型）。本机构特此向您书面警示：购买该产品，可能导致您承担超出自身承受能力损失以及不利后果。请您认真了解产品风险特征，审慎决定购买。&lt;br/&gt;&lt;font color=&quot;#ff4400&quot;&gt;点击继续购买即表明您了解上述提示，并承诺以下内容：&lt;/font&gt;&lt;br/&gt;本人已充分了解上述提示内容，已知悉该产品风险等级高于本人风险承受能力，并且已充分了解该产品风险特征。经审慎考虑，本人仍坚持申请购买，并自愿承担可能产生的一切不利后果。贵司及销售人员不存在主动向本人推介该产品的行为。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 原生提供了一个richText标签，可以接受html格式字符串，并渲染。</span><br><span class="line">// 目前约定可以设置width、height 通过style属性传入。</span><br><span class="line">// ios对样式设置支持较好，安卓很多样式不支持，如color</span><br><span class="line">&lt;richText :data=&quot;getContent&quot; style=&quot;width:484px;height:450px;&quot;&gt;&lt;/richText&gt;</span><br><span class="line"></span><br><span class="line">getContent() &#123;</span><br><span class="line">    return `&lt;div style=&quot;color: #333;</span><br><span class="line">                font-size: 14px;</span><br><span class="line">                line-height: 25px;</span><br><span class="line">                &quot;&gt;$&#123;this.content&#125;&lt;/div&gt;`</span><br><span class="line">&#125; </span><br><span class="line">//this.content为接口返回数据：一段文字&lt;br/&gt;&lt;font color=&quot;#ff4400&quot;&gt;一段文字&lt;/font&gt;&lt;br/&gt;一段文字</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>weex ui</p>
 <p><a href="https://github.com/alibaba/weex-ui/tree/master/packages/wxc-rich-text" target="_blank" rel="noopener">https://github.com/alibaba/weex-ui/tree/master/packages/wxc-rich-text</a></p>
@@ -237,6 +237,11 @@
                 
 
                 <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2019/07/08/能有效解决问题的提问方式/" data-toggle="tooltip" data-placement="top"
+                           title="能有效解决问题的提问方式">&larr; Previous Post</a>
+                    </li>
                     
                     
                     <li class="next">
